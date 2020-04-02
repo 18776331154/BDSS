@@ -74,60 +74,50 @@ int flag;
 
 void TIM1_UP_IRQHandler(void)  
 {    
-	
-	     ENCODER_T *encoder=control_return_to_show();
-	
-	     if(TIM_GetFlagStatus(TIM1,TIM_FLAG_Update)==SET)//5ms定时中断
-   {   
-	
-		 TIM_ClearITPendingBit(TIM1,TIM_IT_Update);                             //===清除定时器1中断标志位			
-		 encoder_caculter(encoder);
-	    if(CAR_Run_Flag == SET)
-	{ 		
+	ENCODER_T *encoder=control_return_to_show();
+	if(TIM_GetFlagStatus(TIM1,TIM_FLAG_Update)==SET)			//5ms定时中断
+	{   
+		TIM_ClearITPendingBit(TIM1,TIM_IT_Update);				//清除定时器1中断标志位			
+		encoder_caculter(encoder);
+		if(CAR_Run_Flag == SET)
+		{ 		
+			if(Dis_PID_Flag == SET)								//如果偏航角环PID控制器使能
+			{
+				CAR_Velocity = Distance_PID(encoder->angle,CAR_Distance,&Dis_Arrive_Flag);																									
+				Amplitude_Limiting(&CAR_Velocity,7000);			//角速度限幅
+			}
+			if(delay_flag==1)
+			{
+				if(++delay_50==5)
+					delay_50=0;
+					delay_flag=0;								//给主函数提供50ms的精准延时
+			}
+			Encoder_Left=Read_Encoder(2);						//读取编码器的值
+			Encoder_Right=-Read_Encoder(3);						//读取编码器的值
 
-              if(Dis_PID_Flag == SET)										          //如果偏航角环PID控制器使能
-           {
-                   CAR_Velocity = Distance_PID(encoder->angle,CAR_Distance,&Dis_Arrive_Flag);																									
-                   Amplitude_Limiting(&CAR_Velocity,7000);        //角速度限幅
-           }
-		
-		            if(delay_flag==1)
-			   {
-				 if(++delay_50==5)	 delay_50=0,delay_flag=0;                      //给主函数提供50ms的精准延时
-			   }
-		  	        Encoder_Left=Read_Encoder(2);                                       //===读取编码器的值							 //为了保证M法测速的时间基准，首先读取编码器数据
-				    Encoder_Right=-Read_Encoder(3);                                      //===读取编码器的值
-
-					Kinematic_Analysis(Velocity,Angle);     															//小车运动学分析   
-			          if(Turn_Off(Voltage)==0)                              							 //===如果不存在异常
-				    {
-					    Motor_A=Incremental_PI_A(Encoder_Left,Target_A);                   //===速度闭环控制计算电机A最终PWM
-					    Motor_B=Incremental_PI_B(Encoder_Right,Target_B);                  //===速度闭环控制计算电机B最终PWM 
-					    Xianfu_Pwm();                                                      //===PWM限幅
-					    Set_Pwm(Motor_A,Motor_B,Servo);                                 	 //===赋值给PWM寄存器  
-				   }
-			 else   Set_Pwm(0,0,SERVO_INIT);  
-                               						 //===赋值给PWM寄存器  	
-	}
-	
-	           else 
-					                  					            //如果车辆运动未使能
-                  {
-                        MOTOR_Release();                                    //释放电机
-                  }	
-				
-				       Voltage_Temp=Get_battery_volt();		                                 //=====读取电池电压		
-					   Voltage_Count++;                                                     //=====平均值计数器
-					   Voltage_All+=Voltage_Temp;                                           //=====多次采样累积
-				
-			if(Voltage_Count==100) Voltage=Voltage_All/100,Voltage_All=0,Voltage_Count=0;//=====求平均值		                                   
-			  
-			if(Flag_Show==0)				Led_Flash(100);
-			else if(Flag_Show==1)	Led_Flash(0);  //led闪烁
-				
-				
-				
-//			 Key();    //===扫描按键状态 单击双击可以改变小车运行状态
+			Kinematic_Analysis(Velocity,Angle);					//小车运动学分析   
+			if(Turn_Off(Voltage)==0)							//如果不存在异常
+			{
+				Motor_A=Incremental_PI_A(Encoder_Left,Target_A);//速度闭环控制计算电机A最终PWM
+				Motor_B=Incremental_PI_B(Encoder_Right,Target_B);//速度闭环控制计算电机B最终PWM 
+				Xianfu_Pwm();									//PWM限幅
+				Set_Pwm(Motor_A,Motor_B,Servo);					//赋值给PWM寄存器  
+			}
+			else
+			Set_Pwm(0,0,SERVO_INIT);							//赋值给PWM寄存器  	
+		}
+		else													//如果车辆运动未使能
+		{
+			MOTOR_Release();									//释放电机
+		}	
+		Voltage_Temp=Get_battery_volt();						//读取电池电压		
+		Voltage_Count++;										//平均值计数器
+		Voltage_All+=Voltage_Temp;								//多次采样累积
+		if(Voltage_Count==100) Voltage=Voltage_All/100,Voltage_All=0,Voltage_Count=0;//求平均值		                                   
+		if(Flag_Show==0)
+			Led_Flash(100);
+		else if(Flag_Show==1)
+			Led_Flash(0);										//led闪烁
 	}
 } 
 
