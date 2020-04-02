@@ -178,11 +178,4 @@ void encoder_caculter(ENCODER_T * encoder_n)
  * @param[in] u16 time 时间
  * @param[in] int *point 指针，用于输出
  */
-void car_control(void(*control_action)(u16 a,u16 b),u16 speed,u16 time,int *point)
-{
-	hanshuzhizhenshuzu[3]=control_action;
-	int a;
-	a=speed+time;
-	point=&a;
 
-}

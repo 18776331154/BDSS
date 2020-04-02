@@ -32,4 +32,5 @@ void OLED_ShowNumber(u8 x,u8 y,u32 num,u8 len,u8 size); //在指定的位置显示数字
 void OLED_ShowString(u8 x,u8 y,const u8 *p);	          //在指定的位置显示字符串
 
 
-#endif   
+#endif 
+

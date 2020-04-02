@@ -55,12 +55,7 @@ void CAR_Move(int velocity)
     CAR_Velocity = velocity;
     CAR_Run_Flag = SET;
 }
-void car_turn_right(void)
-{
 
-
-
-}
 
 void CAR_Dis(int Dis)
 {
@@ -79,55 +74,47 @@ int flag;
 
 void TIM1_UP_IRQHandler(void)  
 {    
-	ENCODER_T *encoder=control_return_to_show();
 	
-	if(TIM_GetFlagStatus(TIM1,TIM_FLAG_Update)==SET)//5ms定时中断
-	{   
+	     ENCODER_T *encoder=control_return_to_show();
+	
+	     if(TIM_GetFlagStatus(TIM1,TIM_FLAG_Update)==SET)//5ms定时中断
+   {   
+	
 		 TIM_ClearITPendingBit(TIM1,TIM_IT_Update);                             //===清除定时器1中断标志位			
 		 encoder_caculter(encoder);
-	if(CAR_Run_Flag == SET)
-	{		
-//			if(flag==1)//人为打开低速开关
-//				
-//			//师傅(control.c)他(encoder.c)一本武林秘籍(car_stop)，让他按照武林秘籍练武功(car_control)
-//			car_control(car_run,255,255,&flag);//不管函数指针有没有带参数（是否有成员变量），只需要填函数地址
-//		
-//			
-//			
-//			
-//			if(flag==2)//检测到管理者身份
-//			car_control(car_run,255,255,&flag);//&flag用作输出
-//		
-//		
-//		if(quanshu==10)  trun_right();
- if(Dis_PID_Flag == SET)										          //如果偏航角环PID控制器使能
-    {
-      CAR_Velocity = Distance_PID(encoder->angle,CAR_Distance,&Dis_Arrive_Flag);																									
-      Amplitude_Limiting(&CAR_Velocity,7000);        //角速度限幅
-    }
+	    if(CAR_Run_Flag == SET)
+	{ 		
+
+              if(Dis_PID_Flag == SET)										          //如果偏航角环PID控制器使能
+           {
+                   CAR_Velocity = Distance_PID(encoder->angle,CAR_Distance,&Dis_Arrive_Flag);																									
+                   Amplitude_Limiting(&CAR_Velocity,7000);        //角速度限幅
+           }
 		
-		  if(delay_flag==1)
-			 {
+		            if(delay_flag==1)
+			   {
 				 if(++delay_50==5)	 delay_50=0,delay_flag=0;                      //给主函数提供50ms的精准延时
-			 }
+			   }
 		  	        Encoder_Left=Read_Encoder(2);                                       //===读取编码器的值							 //为了保证M法测速的时间基准，首先读取编码器数据
 				    Encoder_Right=-Read_Encoder(3);                                      //===读取编码器的值
-				    Get_RC();
+
 					Kinematic_Analysis(Velocity,Angle);     															//小车运动学分析   
-			if(Turn_Off(Voltage)==0)                              							 //===如果不存在异常
-				{
-					Motor_A=Incremental_PI_A(Encoder_Left,Target_A);                   //===速度闭环控制计算电机A最终PWM
-					Motor_B=Incremental_PI_B(Encoder_Right,Target_B);                  //===速度闭环控制计算电机B最终PWM 
-					Xianfu_Pwm();                                                      //===PWM限幅
-					Set_Pwm(Motor_A,Motor_B,Servo);                                 	 //===赋值给PWM寄存器  
-				}
-			 else Set_Pwm(0,0,SERVO_INIT);  
+			          if(Turn_Off(Voltage)==0)                              							 //===如果不存在异常
+				    {
+					    Motor_A=Incremental_PI_A(Encoder_Left,Target_A);                   //===速度闭环控制计算电机A最终PWM
+					    Motor_B=Incremental_PI_B(Encoder_Right,Target_B);                  //===速度闭环控制计算电机B最终PWM 
+					    Xianfu_Pwm();                                                      //===PWM限幅
+					    Set_Pwm(Motor_A,Motor_B,Servo);                                 	 //===赋值给PWM寄存器  
+				   }
+			 else   Set_Pwm(0,0,SERVO_INIT);  
                                						 //===赋值给PWM寄存器  	
-			}
-				 else					                  					            //如果车辆运动未使能
-  {
-    MOTOR_Release();                                    //释放电机
-  }	
+	}
+	
+	           else 
+					                  					            //如果车辆运动未使能
+                  {
+                        MOTOR_Release();                                    //释放电机
+                  }	
 				
 				       Voltage_Temp=Get_battery_volt();		                                 //=====读取电池电压		
 					   Voltage_Count++;                                                     //=====平均值计数器
@@ -143,20 +130,7 @@ void TIM1_UP_IRQHandler(void)
 //			 Key();    //===扫描按键状态 单击双击可以改变小车运行状态
 	}
 } 
-/**************************************************************************
-函数功能：按键修改小车运行状态 
-入口参数：无
-返回  值：无
-**************************************************************************/
-void Key(void)
-{	
-	u8 tmp,tmp2;
-	tmp=click(); 
-	if(tmp==1)Flag_Stop=!Flag_Stop;//单击控制小车的启停
-	//if(tmp==2)Flag_Show=!Flag_Show;//双击控制小车的显示状态
-	tmp2=Long_Press();          
-  if(tmp2==1)Flag_Show=!Flag_Show;//控制小车的显示状态
-}
+
 
 /**************************************************************************
 函数功能：异常关闭电机
@@ -242,34 +216,6 @@ void Xianfu_Pwm(void)
 入口参数：无
 返回  值：无
 **************************************************************************/
-void Get_RC(void)
-{
-	int Yuzhi=2;
-	static float Bias,Last_Bias;
-  float LY,RX;
-	if(Flag_Way==0)//蓝牙控制
-	{
-		if(Flag_Direction==0) Velocity=0,Angle=0;   //停止
-		else if(Flag_Direction==1) Velocity=Bluetooth_Velocity,Angle=0;  //前进
-		else if(Flag_Direction==2) Velocity=Bluetooth_Velocity,Angle=PI/5;  //右前
-		else if(Flag_Direction==3) Velocity=0,Angle=0;   //舵机向右
-		else if(Flag_Direction==4) Velocity=-Bluetooth_Velocity,Angle=PI/5;  // 右后
-		else if(Flag_Direction==5) Velocity=-Bluetooth_Velocity,Angle=0;    //后退
-		else if(Flag_Direction==6) Velocity=-Bluetooth_Velocity,Angle=-PI/5;  //左后
-		else if(Flag_Direction==7) Velocity=0,Angle=0;                       //舵机向左
-		else if(Flag_Direction==8) Velocity=Bluetooth_Velocity,Angle=-PI/5;  //左前
-	}
-		if(Flag_Way==1)//PS2控制
-	{
-  	    LY=PS2_LY-128;     //计算偏差
-		RX=PS2_RX-128;
-		if(LY>-Yuzhi&&LY<Yuzhi)LY=0;   //小角度设为死区 防止抖动出现异常
-	    if(RX>-Yuzhi&&RX<Yuzhi)RX=0;
-		 Velocity=-LY/2;	  //速度和摇杆的力度相关。
-		 Angle=RX/200; 
-	}
-
-}
 
 int Distance_PID(int Now,int Target,FlagStatus* Arrive_Flag)
 {
@@ -306,4 +252,5 @@ void Amplitude_Limiting(int* Variable,int Range)
 {   
     if(*Variable >  Range)*Variable =  Range;  
     if(*Variable < -Range)*Variable = -Range;
-}    
+} 
+

@@ -81,9 +81,9 @@
 #include "stmflash.h"
 #include "control.h"
 #include "show.h"
-#include "DataScope_DP.h"
-#include "usart3.h"
-#include "pstwo.h"
+
+
+
 //JTAG模式设置定义
 #define JTAG_SWD_DISABLE   0X02
 #define SWD_ENABLE         0X01
