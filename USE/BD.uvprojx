@@ -592,21 +592,6 @@
               <FileType>1</FileType>
               <FilePath>..\HAREWARE\OLED\oled.c</FilePath>
             </File>
-            <File>
-              <FileName>pstwo.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\HAREWARE\PSTWO\pstwo.c</FilePath>
-            </File>
-            <File>
-              <FileName>stmflash.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\HAREWARE\STMFLASH\stmflash.c</FilePath>
-            </File>
-            <File>
-              <FileName>usart3.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\HAREWARE\USART3\usart3.c</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -616,11 +601,6 @@
               <FileName>control.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\BALANCE\CONTROL\control.c</FilePath>
-            </File>
-            <File>
-              <FileName>DataScop_DP.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\BALANCE\DATASCOP_DP\DataScop_DP.c</FilePath>
             </File>
             <File>
               <FileName>show.c</FileName>
