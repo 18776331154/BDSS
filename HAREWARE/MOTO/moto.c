@@ -104,12 +104,12 @@ void Servo_PWM_Init(u16 arr,u16 psc)
 	TIM_Cmd(TIM1,ENABLE);                              //使能定时器1
 } 
 
-void MOTOR_Release(void)
-{
-	  CAR_Run_Flag = RESET;
-	
-	PWMA1 = 0;
-	PWMA2 = 0;
-	PWMB1 = 0;
-	PWMB2 = 0;
-}
+//void MOTOR_Release(void)
+//{
+//	  CAR_Run_Flag = RESET;
+//	
+//	PWMA1 = 0;
+//	PWMA2 = 0;
+//	PWMB1 = 0;
+//	PWMB2 = 0;
+//}

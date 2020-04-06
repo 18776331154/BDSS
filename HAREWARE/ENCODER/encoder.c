@@ -161,21 +161,11 @@ void encoder_caculter(ENCODER_T * encoder_n)
 		
 		encoder->angle_last=encoder->angle;
 		encoder->angle_speed_last=encoder->angle_speed;	
+	    
 //		if(encoder->angle_speed>100)			
 //		hanshuzhizhenshuzu[1](1,2);
 
 }
 
 
-/**@brief 小车控制
- *
- * @param[in] void(*control_action)(u16 a,u16 b) 
-							*control_action 函数指针名
-							u16 a  某某成员变量
-							u16 b		某某成员变量
-
- * @param[in] u16 speed 速度
- * @param[in] u16 time 时间
- * @param[in] int *point 指针，用于输出
- */
 

@@ -23,51 +23,8 @@ void Kinematic_Analysis(float velocity,float angle)
 
 
 
-/********************************************************************************
-    功能：	刹车
-    参数： 无
-    返回：	无
-    备注：	利用速度PI控制器将速度置零，然后释放电机
-*********************************************************************************/
-void CAR_Breaking(void)
-{
-    CAR_Velocity = 0;
-  
-    CAR_Run_Flag = SET;
-
-    while( Encoder_Left|| Encoder_Right );
-
-    CAR_Run_Flag = RESET;
-    MOTOR_Release();
-}
 
 
-/********************************************************************************
-    功能：	车辆直线运动，开环
-    参数：  velocity    车辆速度
-    返回：	无
-    备注：	如果速度为0，刹车
-*********************************************************************************/
-void CAR_Move(int velocity)
-{
-    if(velocity == 0) {CAR_Breaking();return;}
-
-    CAR_Velocity = velocity;
-    CAR_Run_Flag = SET;
-}
-
-
-void CAR_Dis(int Dis)
-{
-    CAR_Distance=(int)(1561.0000/21)*Dis;
-    Dis_PID_Flag    = SET;
-    CAR_Run_Flag    = SET;
-    Dis_Arrive_Flag = RESET;
-	
-    while(Dis_Arrive_Flag == RESET);   
-    Dis_PID_Flag    = RESET;
-	CAR_Breaking();
-}
 
 int flag;
 
@@ -79,13 +36,7 @@ void TIM1_UP_IRQHandler(void)
 	{   
 		TIM_ClearITPendingBit(TIM1,TIM_IT_Update);				//清除定时器1中断标志位			
 		encoder_caculter(encoder);
-		if(CAR_Run_Flag == SET)
-		{ 		
-			if(Dis_PID_Flag == SET)								//如果偏航角环PID控制器使能
-			{
-				CAR_Velocity = Distance_PID(encoder->angle,CAR_Distance,&Dis_Arrive_Flag);																									
-				Amplitude_Limiting(&CAR_Velocity,7000);			//角速度限幅
-			}
+      
 			if(delay_flag==1)
 			{
 				if(++delay_50==5)
@@ -94,7 +45,7 @@ void TIM1_UP_IRQHandler(void)
 			}
 			Encoder_Left=Read_Encoder(2);						//读取编码器的值
 			Encoder_Right=-Read_Encoder(3);						//读取编码器的值
-
+            Get_RC();
 			Kinematic_Analysis(Velocity,Angle);					//小车运动学分析   
 			if(Turn_Off(Voltage)==0)							//如果不存在异常
 			{
@@ -106,10 +57,7 @@ void TIM1_UP_IRQHandler(void)
 			else
 			Set_Pwm(0,0,SERVO_INIT);							//赋值给PWM寄存器  	
 		}
-		else													//如果车辆运动未使能
-		{
-			MOTOR_Release();									//释放电机
-		}	
+		
 		Voltage_Temp=Get_battery_volt();						//读取电池电压		
 		Voltage_Count++;										//平均值计数器
 		Voltage_All+=Voltage_Temp;								//多次采样累积
@@ -118,8 +66,9 @@ void TIM1_UP_IRQHandler(void)
 			Led_Flash(100);
 		else if(Flag_Show==1)
 			Led_Flash(0);										//led闪烁
+				 Key();    //===扫描按键状态 单击双击可以改变小车运行状态
 	}
-} 
+
 
 
 /**************************************************************************
@@ -243,4 +192,37 @@ void Amplitude_Limiting(int* Variable,int Range)
     if(*Variable >  Range)*Variable =  Range;  
     if(*Variable < -Range)*Variable = -Range;
 } 
-
+/**************************************************************************
+函数功能：遥控
+入口参数：无
+返回  值：无
+**************************************************************************/
+void Get_RC(void)
+{
+	int Yuzhi=2;
+	static float Bias,Last_Bias;
+  float LY,RX;
+	if(Flag_Way==0)//蓝牙控制
+	{
+		if(Flag_Direction==0) Velocity=0,Angle=0;   //停止
+//		else if(Flag_Direction==1) Velocity=Bluetooth_Velocity,Angle=0;  //前进
+//		else if(Flag_Direction==2) Velocity=Bluetooth_Velocity,Angle=PI/5;  //右前
+//		else if(Flag_Direction==3) Velocity=0,Angle=0;   //舵机向右
+//		else if(Flag_Direction==4) Velocity=-Bluetooth_Velocity,Angle=PI/5;  // 右后
+//		else if(Flag_Direction==5) Velocity=-Bluetooth_Velocity,Angle=0;    //后退
+//		else if(Flag_Direction==6) Velocity=-Bluetooth_Velocity,Angle=-PI/5;  //左后
+//		else if(Flag_Direction==7) Velocity=0,Angle=0;                       //舵机向左
+//		else if(Flag_Direction==8) Velocity=Bluetooth_Velocity,Angle=-PI/5;  //左前
+	}
+	
+}
+void automatic_control(u8 now,u8 targe)
+{
+	u8 error;
+	error=now-targe;
+	if(error==0)
+		Set_Pwm(0,0,SERVO_INIT);
+	else
+		Set_Pwm(10,10,SERVO_INIT);	
+	
+}

@@ -13,7 +13,7 @@ int angle_speed_last;
 int angle_acceleration;
 int cnt;
 int quanshu;	 
-
+//static int distance;
 
 }ENCODER_T;
 
