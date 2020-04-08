@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>STM32F10X_MD,USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>..\CORE;..\USE;..\STM32F10x_FWLIB\inc;..\SYSTEM\delay;..\SYSTEM\sys;..\SYSTEM\usart;..\HAREWARE\LED;..\HAREWARE\ADC;..\HAREWARE\ENCODER;..\HAREWARE\EXTI;..\HAREWARE\KEY;..\HAREWARE\MOTO;..\HAREWARE\OLED;..\HAREWARE\PSTWO;..\HAREWARE\TIMER;..\HAREWARE\STMFLASH;..\HAREWARE\USART3;..\BALANCE\CONTROL;..\BALANCE\DATASCOP_DP;..\BALANCE\SHOW;..\GLOBAL</IncludePath>
+              <IncludePath>..\CORE;..\USE;..\STM32F10x_FWLIB\inc;..\SYSTEM\delay;..\SYSTEM\sys;..\SYSTEM\usart;..\HAREWARE\LED;..\HAREWARE\ADC;..\HAREWARE\ENCODER;..\HAREWARE\EXTI;..\HAREWARE\KEY;..\HAREWARE\MOTO;..\HAREWARE\OLED;..\HAREWARE\PSTWO;..\HAREWARE\TIMER;..\HAREWARE\STMFLASH;..\HAREWARE\USART3;..\BALANCE\CONTROL;..\BALANCE\DATASCOP_DP;..\BALANCE\SHOW;..\GLOBAL;..\HAREWARE;..\HAREWARE\STMFLASH</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -592,6 +592,16 @@
               <FileType>1</FileType>
               <FilePath>..\HAREWARE\OLED\oled.c</FilePath>
             </File>
+            <File>
+              <FileName>usart3.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>C:\Users\huang\Desktop\BD\HAREWARE\USART3\usart3.c</FilePath>
+            </File>
+            <File>
+              <FileName>stmflash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>C:\Users\huang\Desktop\BD\HAREWARE\STMFLASH\stmflash.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -606,6 +616,11 @@
               <FileName>show.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\BALANCE\SHOW\show.c</FilePath>
+            </File>
+            <File>
+              <FileName>DataScop_DP.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>C:\Users\huang\Desktop\BD\BALANCE\DATASCOP_DP\DataScop_DP.c</FilePath>
             </File>
           </Files>
         </Group>

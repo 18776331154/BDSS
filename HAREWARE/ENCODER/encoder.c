@@ -167,5 +167,10 @@ void encoder_caculter(ENCODER_T * encoder_n)
 
 }
 
+void car_control(void(*control_action)(u16 a,u16 b))
+{
+	hanshuzhizhenshuzu[3]=control_action;
+	
 
+}
 
