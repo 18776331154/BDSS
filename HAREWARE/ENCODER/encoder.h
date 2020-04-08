@@ -22,7 +22,7 @@ void encoder_caculter(ENCODER_T * encoder_n);
 
 ENCODER_T *control_return_to_show(void);
 
-void car_control(void(*control_action)(u8 a,u8 b,u8 c));
+void car_control(void(*control_action)(int a,int b,int c));
 
 void Encoder_Init_TIM2(void);             //把TIM2初始化为编码器接口模式
 void Encoder_Init_TIM3(void);             //把TIM3初始化为编码器接口模式

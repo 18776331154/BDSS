@@ -206,7 +206,7 @@ void Get_RC(void)
 	{
 		if(Flag_Direction==0) Velocity=0,Angle=0;   //停止
 		else if(Flag_Direction==1) Velocity=Bluetooth_Velocity,Angle=0;  //前进
-//		car_control(caculation_distance());
+		car_control(caculation_distance(67,78,30));
 //		else if(Flag_Direction==2) Velocity=Bluetooth_Velocity,Angle=PI/5;  //右前
 //		else if(Flag_Direction==3) Velocity=0,Angle=0;   //舵机向右
 //		else if(Flag_Direction==4) Velocity=-Bluetooth_Velocity,Angle=PI/5;  // 右后
@@ -227,7 +227,7 @@ void automatic_control(u8 now,u8 targe)
 		Set_Pwm(10,10,SERVO_INIT);	
 	
 }
-void caculation_distance(u8 Encoder_Left ,u8 Encoder_Right,u8 targe)
+void caculation_distance(int Encoder_Left ,int Encoder_Right,int targe)
 {
 	
 	u8 count;
@@ -235,7 +235,7 @@ void caculation_distance(u8 Encoder_Left ,u8 Encoder_Right,u8 targe)
 	u8 Dis;	
 	u8 error;
 	u8 now;
-	u8 Targe;
+	int Targe;
 	now=(Encoder_Left+Encoder_Right)/2;
 	count+=now;
 	last_count=count;
@@ -244,7 +244,7 @@ void caculation_distance(u8 Encoder_Left ,u8 Encoder_Right,u8 targe)
 		count+=65535;
 	if(count<last_count)
 	count-=65535;
-	Targe=(u8)(1561/21*targe);
+	Targe=(int)(1561/21*targe);
 	error=now-Targe;
 	if(error==0)
 		Set_Pwm(0,0,SERVO_INIT);

@@ -3,31 +3,31 @@ unsigned char i;          //计数变量
 unsigned char Send_Count; //串口需要发送的数据个数
 float Vol;
 
-void caculation_distance(u8 Encoder_Left ,u8 Encoder_Right,u8 *distance)
-{
-	u8 average;
-	u8 count;
-	u8 last_count;
-	u8 Dis;
-	Dis=*distance;
-	
-	average=(Encoder_Left+Encoder_Right)/2;
-	count+=average;
-	last_count=count;
-	
-	if(count>65535)
-		count+=65535;
-	if(count<last_count)
-	count-=65535;
-	
-		
-	Dis=(1561/21)*30;
-	
-	
-	
-	OLED_ShowNumber(0,20, *distance,5,16);
-	
-}
+//void caculation_distance(u8 Encoder_Left ,u8 Encoder_Right,u8 *distance)
+//{
+//	u8 average;
+//	u8 count;
+//	u8 last_count;
+//	u8 Dis;
+//	Dis=*distance;
+//	
+//	average=(Encoder_Left+Encoder_Right)/2;
+//	count+=average;
+//	last_count=count;
+//	
+//	if(count>65535)
+//		count+=65535;
+//	if(count<last_count)
+//	count-=65535;
+//	
+//		
+//	Dis=(1561/21)*30;
+//	
+//	
+//	
+//	OLED_ShowNumber(0,20, *distance,5,16);
+//	
+//}
 
 
 

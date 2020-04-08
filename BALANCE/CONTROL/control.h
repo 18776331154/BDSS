@@ -28,6 +28,6 @@ int Distance_PID(int Now,int Target,FlagStatus* Arrive_Flag);
 int  __abs(int number);
 void Amplitude_Limiting(int* Variable,int Range);
 void CAR_Dis(int Dis);
-void caculation_distance(u8 Encoder_Left ,u8 Encoder_Right,u8 targe)
-void automatic_control(u8 now,u8 targe);
+void caculation_distance(int Encoder_Left ,int Encoder_Right,int targe)
+//void automatic_control(u8 now,u8 targe);
 #endif
