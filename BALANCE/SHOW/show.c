@@ -31,98 +31,98 @@ float Vol;
 
 
 
-void oled_show(void)
-{
-
-	ENCODER_T *encoder=control_return_to_show();
-//	encoder->distance=0;
-//	OLED_ShowNumber(0,0, encoder->angle,5,16);
-//	
-//	OLED_ShowNumber(0,10, encoder->angle_speed,5,16);
-//	
-//	OLED_ShowNumber(0,20, distance,5,16);
-//	static int distance=0;
-	
-	OLED_ShowNumber(0,30,encoder->angle,5,12);	
-
-	OLED_Refresh_Gram();	
-	}
-
-
 //void oled_show(void)
 //{
-//		if(Flag_Way==0)	
-//		{
-//		  OLED_ShowString(00,0,"SPEED");
-//			OLED_ShowNumber(45,0, Bluetooth_Velocity,3,12);  //PS2的数据	
-//		  OLED_ShowString(00,10,"RX");
-//			OLED_ShowNumber(30,10, PID_Send,3,12);  //PS2的数据			
-//		}
-//		else if(Flag_Way==1)
-//		{
-//			OLED_ShowString(00,0,"LY");
-//			OLED_ShowNumber(15,0, PS2_LY,3,12);  //PS2的数据
-//			OLED_ShowString(40,0,"RX");
-//			OLED_ShowNumber(55,0, PS2_RX,3,12);
-//			OLED_ShowString(0,10,"KEY");
-//			OLED_ShowNumber(25,10,PS2_KEY,2,12);
-//		}
-//		else if(Flag_Way==2)
-//		{
-//			OLED_Show_CCD(); 
-//			OLED_ShowString(00,10,"Z");
-//			OLED_ShowNumber(35,10, CCD_Zhongzhi,3,12);
-//			OLED_ShowString(70,10,"Y");
-//			OLED_ShowNumber(95,10, CCD_Yuzhi,3,12);
-//		}
-//		else if(Flag_Way==3)
-//		{
-//			OLED_ShowString(00,0,"L");
-//			OLED_ShowNumber(10,0,Sensor_Left,4,12);	
-//			OLED_ShowString(40,0,"M");
-//			OLED_ShowNumber(50,0,Sensor_Middle,4,12);
-//			OLED_ShowString(80,0,"R");
-//			OLED_ShowNumber(90,0,Sensor_Right,4,12);
-//			OLED_ShowString(0,10,"Z");
-//			OLED_ShowNumber(20,10,Sensor,4,12);		  
-//		}									
-//		                      OLED_ShowString(00,20,"EncoLEFT");    //编码器数据
-//		if( Encoder_Left<0)		OLED_ShowString(80,20,"-"),
-//		                      OLED_ShowNumber(95,20,-Encoder_Left,5,12);
-//		else                 	OLED_ShowString(80,20,"+"),
-//		                      OLED_ShowNumber(95,20, Encoder_Left,5,12);
 
-//		                      OLED_ShowString(00,30,"EncoRIGHT");
-//		if(Encoder_Right<0)	  OLED_ShowString(80,30,"-"),
-//		                      OLED_ShowNumber(95,30,-Encoder_Right,5,12);
-//		else               		OLED_ShowString(80,30,"+"),
-//		                      OLED_ShowNumber(95,30,Encoder_Right,5,12);	
+//	ENCODER_T *encoder=control_return_to_show();
+////	encoder->distance=0;
+////	OLED_ShowNumber(0,0, encoder->angle,5,16);
+////	
+////	OLED_ShowNumber(0,10, encoder->angle_speed,5,16);
+////	
+////	OLED_ShowNumber(0,20, distance,5,16);
+////	static int distance=0;
+//	
+//	OLED_ShowNumber(0,30,encoder->angle,5,12);	
 
-
-//		                      OLED_ShowString(00,40,"VOLTAGE");
-//		                      OLED_ShowString(68,40,".");
-//		                      OLED_ShowString(90,40,"V");
-//		                      OLED_ShowNumber(55,40,Voltage/100,2,12);
-//		                      OLED_ShowNumber(78,40,Voltage%100,2,12);
-//		 if(Voltage%100<10) 	OLED_ShowNumber(72,40,0,2,12);
-//		                    
-//													if(Flag_Stop==0)
-//													OLED_ShowString(103,40,"O-N");
-//													if(Flag_Stop==1)
-//													OLED_ShowString(103,40,"OFF");
-//		
-//		
-//													OLED_ShowString(00,50,"MODE-");
-//													if(Flag_Way==0)               OLED_ShowString(40,50,"APP");
-//													else if(Flag_Way==1)          OLED_ShowString(40,50,"PS2");
-//													else if(Flag_Way==2)				  OLED_ShowString(40,50,"CCD");
-//													else if(Flag_Way==3)				  OLED_ShowString(40,50,"ELE");
-
-//													OLED_ShowString(80,50,"S");
-//													OLED_ShowNumber(95,50,Servo,4,12);
-//		//=============刷新=======================//
-//		OLED_Refresh_Gram();	
+//	OLED_Refresh_Gram();	
 //	}
+
+
+void oled_show(void)
+{
+		if(Flag_Way==0)	
+		{
+		  OLED_ShowString(00,0,"SPEED");
+			OLED_ShowNumber(45,0, Bluetooth_Velocity,3,12);  //PS2的数据	
+		  OLED_ShowString(00,10,"RX");
+			OLED_ShowNumber(30,10, PID_Send,3,12);  //PS2的数据			
+		}
+		else if(Flag_Way==1)
+		{
+			OLED_ShowString(00,0,"LY");
+			OLED_ShowNumber(15,0, PS2_LY,3,12);  //PS2的数据
+			OLED_ShowString(40,0,"RX");
+			OLED_ShowNumber(55,0, PS2_RX,3,12);
+			OLED_ShowString(0,10,"KEY");
+			OLED_ShowNumber(25,10,PS2_KEY,2,12);
+		}
+		else if(Flag_Way==2)
+		{
+			OLED_Show_CCD(); 
+			OLED_ShowString(00,10,"Z");
+			OLED_ShowNumber(35,10, CCD_Zhongzhi,3,12);
+			OLED_ShowString(70,10,"Y");
+			OLED_ShowNumber(95,10, CCD_Yuzhi,3,12);
+		}
+		else if(Flag_Way==3)
+		{
+			OLED_ShowString(00,0,"L");
+			OLED_ShowNumber(10,0,Sensor_Left,4,12);	
+			OLED_ShowString(40,0,"M");
+			OLED_ShowNumber(50,0,Sensor_Middle,4,12);
+			OLED_ShowString(80,0,"R");
+			OLED_ShowNumber(90,0,Sensor_Right,4,12);
+			OLED_ShowString(0,10,"Z");
+			OLED_ShowNumber(20,10,Sensor,4,12);		  
+		}									
+		                      OLED_ShowString(00,20,"EncoLEFT");    //编码器数据
+		if( Encoder_Left<0)		OLED_ShowString(80,20,"-"),
+		                      OLED_ShowNumber(95,20,-Encoder_Left,5,12);
+		else                 	OLED_ShowString(80,20,"+"),
+		                      OLED_ShowNumber(95,20, Encoder_Left,5,12);
+
+		                      OLED_ShowString(00,30,"EncoRIGHT");
+		if(Encoder_Right<0)	  OLED_ShowString(80,30,"-"),
+		                      OLED_ShowNumber(95,30,-Encoder_Right,5,12);
+		else               		OLED_ShowString(80,30,"+"),
+		                      OLED_ShowNumber(95,30,Encoder_Right,5,12);	
+
+
+		                      OLED_ShowString(00,40,"VOLTAGE");
+		                      OLED_ShowString(68,40,".");
+		                      OLED_ShowString(90,40,"V");
+		                      OLED_ShowNumber(55,40,Voltage/100,2,12);
+		                      OLED_ShowNumber(78,40,Voltage%100,2,12);
+		 if(Voltage%100<10) 	OLED_ShowNumber(72,40,0,2,12);
+		                    
+													if(Flag_Stop==0)
+													OLED_ShowString(103,40,"O-N");
+													if(Flag_Stop==1)
+													OLED_ShowString(103,40,"OFF");
+		
+		
+													OLED_ShowString(00,50,"MODE-");
+													if(Flag_Way==0)               OLED_ShowString(40,50,"APP");
+													else if(Flag_Way==1)          OLED_ShowString(40,50,"PS2");
+													else if(Flag_Way==2)				  OLED_ShowString(40,50,"CCD");
+													else if(Flag_Way==3)				  OLED_ShowString(40,50,"ELE");
+
+													OLED_ShowString(80,50,"S");
+													OLED_ShowNumber(95,50,Servo,4,12);
+		//=============刷新=======================//
+		OLED_Refresh_Gram();	
+	}
 
 /**************************************************************************
 函数功能：向APP发送数据

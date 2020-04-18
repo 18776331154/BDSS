@@ -138,9 +138,9 @@ void TIM2_IRQHandler(void)//中断处理函数为空，清除中断标志位后结束中断
 
 ENCODER_T encoder_glable;
 
-typedef void(*encoder_action)(int a,int b,int c) ;	/**< 小车控制函数指针，用于接收实际控制函数的地址 */
+//typedef void(*encoder_action)(int a,int b,int c) ;	/**< 小车控制函数指针，用于接收实际控制函数的地址 */
 
-encoder_action hanshuzhizhenshuzu[10];
+//encoder_action hanshuzhizhenshuzu[10];
 
 ENCODER_T *control_return_to_show(void)
 {
@@ -167,10 +167,10 @@ void encoder_caculter(ENCODER_T * encoder_n)
 
 }
 
-void car_control(void(*control_action)(int a,int b,int c))
-{
-	hanshuzhizhenshuzu[3]=control_action;
-	
+//void car_control(void(*control_action)(int a,int b,int c))
+//{
+//	hanshuzhizhenshuzu[3]=control_action;
+//	
 
-}
+//}
 
