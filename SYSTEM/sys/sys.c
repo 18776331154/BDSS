@@ -1,19 +1,19 @@
 #include "sys.h"
- /**************************************************************************
-作者：平衡小车之家 
-淘宝店铺：http://shop114407458.taobao.com/
-**************************************************************************/
-//设置向量表偏移地址
-//NVIC_VectTab:基址
-//Offset:偏移量			 
-void MY_NVIC_SetVectorTable(u32 NVIC_VectTab, u32 Offset)	 
-{ 	   	 
-	SCB->VTOR = NVIC_VectTab|(Offset & (u32)0x1FFFFF80);//设置NVIC的向量表偏移寄存器
-	//用于标识向量表是在CODE区还是在RAM区
-}
 
-
-
+//////////////////////////////////////////////////////////////////////////////////	 
+//本程序只供学习使用，未经作者许可，不得用于其它任何用途
+//ALIENTEK Mini STM32开发板
+//系统中断分组设置化		   
+//正点原子@ALIENTEK
+//技术论坛:www.openedv.com
+//修改日期:2012/9/10
+//版本：V1.4
+//版权所有，盗版必究。
+//Copyright(C) 正点原子 2009-2019
+//All rights reserved
+//********************************************************************************  
+//THUMB指令不支持汇编内联
+//采用如下方法实现执行汇编指令WFI  
 void WFI_SET(void)
 {
 	__ASM volatile("wfi");		  
@@ -35,21 +35,3 @@ __asm void MSR_MSP(u32 addr)
     MSR MSP, r0 			//set Main Stack value
     BX r14
 }
-
-
-//JTAG模式设置,用于设置JTAG的模式
-//mode:jtag,swd模式设置;00,全使能;01,使能SWD;10,全关闭;	   
-//#define JTAG_SWD_DISABLE   0X02
-//#define SWD_ENABLE         0X01
-//#define JTAG_SWD_ENABLE    0X00		  
-void JTAG_Set(u8 mode)
-{
-	u32 temp;
-	temp=mode;
-	temp<<=25;
-	RCC->APB2ENR|=1<<0;     //开启辅助时钟	   
-	AFIO->MAPR&=0XF8FFFFFF; //清除MAPR的[26:24]
-	AFIO->MAPR|=temp;       //设置jtag模式
-} 
-//系统时钟初始化函数
-//pll:选择的倍频数，从2开始，最大值为16		 
