@@ -426,6 +426,11 @@
           <GroupName>BSL</GroupName>
           <Files>
             <File>
+              <FileName>BSL_MGR.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BSL\BSL_MGR.c</FilePath>
+            </File>
+            <File>
               <FileName>BSL_MOTOR.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\BSL\BSL_MOTOR.c</FilePath>
@@ -454,6 +459,11 @@
               <FileName>HDL_KEY.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\HDL\HDL_KEY.c</FilePath>
+            </File>
+            <File>
+              <FileName>HDL_ENCODER.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HDL\HDL_ENCODER.c</FilePath>
             </File>
           </Files>
         </Group>

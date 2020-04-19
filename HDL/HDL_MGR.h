@@ -3,7 +3,7 @@
 
 
 
-void Hdl_Init(void);
+void Hdl_Mgr_Init(void);
 
 
 
