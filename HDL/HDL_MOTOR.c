@@ -2,7 +2,7 @@
 
 
 
-void Motor_PWM_Init(u16 arr,u16 psc)        
+void HDL_MOTOR_SET_PWM(u16 arr,u16 psc)        
 {
 	TIM_TimeBaseInitTypeDef TIM_TimeBaseInitStruct;
 	TIM_OCInitTypeDef TIM_OCInitStruct;
@@ -57,4 +57,18 @@ void Motor_PWM_Init(u16 arr,u16 psc)
 }
 
 
-
+/**************************************************************************
+函数功能：赋值给PWM寄存器
+入口参数：左轮PWM、右轮PWM
+返回  值：无
+**************************************************************************/
+void Set_Pwm(int motor_a,int motor_b)
+{
+	   
+    	if(motor_a<0)			PWMA1=7200,PWMA2=7200+motor_a;
+			else 	            PWMA2=7200,PWMA1=7200-motor_a;
+		
+		  if(motor_b<0)			PWMB1=7200,PWMB2=7200+motor_b;
+			else 	            PWMB2=7200,PWMB1=7200-motor_b;
+    	
+}

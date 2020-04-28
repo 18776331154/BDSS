@@ -6,9 +6,13 @@
 
 
 void Hdl_Mgr_Init(void)
-{
-	Motor_PWM_Init(7199,0);  				///<初始化PWM 10KHZ，用于驱动电机 
-	Hdl_Key_Init();
+{  
+	HDL_LED_INIT();
+	HDL_KEY_INIT();
+	HDL_ENCODER_TIM2_INIT();            //=====初始化编码器（TIM2的编码器接口模式） 
+	HDL_ENCODER_TIM3_INIT();            //=====初始化编码器（TIM3的编码器接口模式） 
+	HDL_MOTOR_SET_PWM(7199,0);  				///<初始化PWM 10KHZ，用于驱动电机 
+
 
 
 
