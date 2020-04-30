@@ -163,7 +163,7 @@ void HDL_OLED_SHOWSTRING(u8 x,u8 y,const u8 *p)
 入口参数：无
 返 回 值：无
 **************************************************************************/ 
-void OLED_Init(void)
+void HDL_OLED_INIT(void)
 { 	 	 
   GPIO_InitTypeDef GPIO_InitStruct;
                                                       //使能GPIOA GPIOB时钟
@@ -217,5 +217,9 @@ void OLED_Init(void)
 }  
 
 
+void  tuatu(void)
+{
 
+
+}
 

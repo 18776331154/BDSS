@@ -82,3 +82,5 @@ void HDL_ENCODER_TIM3_INIT(void)
 	
 	TIM_Cmd(TIM3, ENABLE); //使能定时3
 }
+
+
