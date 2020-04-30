@@ -435,6 +435,11 @@
               <FileType>1</FileType>
               <FilePath>..\BSL\BSL_MOTOR.c</FilePath>
             </File>
+            <File>
+              <FileName>BSL_ENCODER.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BSL\BSL_ENCODER.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -464,6 +469,11 @@
               <FileName>HDL_ENCODER.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\HDL\HDL_ENCODER.c</FilePath>
+            </File>
+            <File>
+              <FileName>HDL_OLED.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HDL\HDL_OLED.c</FilePath>
             </File>
           </Files>
         </Group>
