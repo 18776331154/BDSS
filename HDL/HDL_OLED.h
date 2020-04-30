@@ -1,6 +1,7 @@
+#ifndef HDL_OLED_H
+#define HDL_OLED_H
+
 #include "sys.h"
-#ifndef HDL_MOTOR_H
-#define HDL_MOTOR_H
 //-----------------OLED¶Ë¿Ú¶¨Òå---------------- 
 #define OLED_RST_Clr() PBout(3)=0   //RES
 #define OLED_RST_Set() PBout(3)=1   //RES
@@ -22,7 +23,7 @@ void HDL_OLED_WR_BYTE(u8 dat,u8 cmd);
 void HDL_OLED_REFRESH_GRAM(void);
 void HDL_OLED_DISPLAY_ON(void);
 void HDL_OLED_DISPLAY_OFF(void);
-
+void  tuatu(void);
 void HDL_OLED_CLEAR(void);
 
 void HDL_OLED_DRAW_POINT(u8 x,u8 y,u8 t);
@@ -33,3 +34,7 @@ void HDL_OLED_SHOWSTRING(u8 x,u8 y,const u8 *p);
 
 
 #endif
+
+
+
+

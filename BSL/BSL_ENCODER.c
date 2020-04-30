@@ -17,3 +17,4 @@ int BSL_ENCODER_READ(u8 TIMX)
 	 }
 		return Encoder_TIM;
 }
+

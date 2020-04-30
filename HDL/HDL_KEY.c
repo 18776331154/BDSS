@@ -102,3 +102,4 @@ u8 HDL_KEY_LONG_PRESS(void)
 			}
 			return 0;
 }
+
