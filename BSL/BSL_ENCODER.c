@@ -17,4 +17,22 @@ int BSL_ENCODER_READ(u8 TIMX)
 	 }
 		return Encoder_TIM;
 }
-
+ ENCODER_NUM encoder_num_t;
+ENCODER_NUM   BSL_DISTANCE_READ_ENCODER_NUM(int Encoder_Left,int Encoder_Right)
+{
+	
+//	u8 count,last_average,distance;
+//	average=(Encoder_Left+Encoder_Right)/2;
+//	
+//	count+=average;
+//	if(average>=65535)
+//	count-=	65535;
+//	last_average=average;
+//	if(last_average>average)
+//		count+=	65535;
+	
+	encoder_num_t.distance+=Encoder_Left;
+	encoder_num_t.quanshu=0;
+	encoder_num_t.speed=Encoder_Left;
+	return encoder_num_t;
+}

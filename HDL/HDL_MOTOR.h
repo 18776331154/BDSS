@@ -10,10 +10,11 @@
 #define PWMB2   TIM4->CCR4
 
 
-void HDL_MOTOR_SET_PWM(u16 arr,u16 psc);
+void HDL_MOTOR_SET_PWM(int motor_a,int motor_b);
 
+void HDL_SERVO_PWM_INIT(u16 arr,u16 psc) ;
 
-
+void HDL_MOTOR_INIT(u16 arr,u16 psc)  ;
 
 
 

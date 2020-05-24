@@ -1,4 +1,7 @@
 #include "HDL_KEY.h"
+#include "HDL_OLED.h"
+#include "delay.h"
+#include "APF_AUTORUN.h"
 
 
 
@@ -16,6 +19,7 @@ void HDL_KEY_INIT(void)
 	GPIO_InitStructure.GPIO_Pin=GPIO_Pin_5;                           // PA5 
 	GPIO_InitStructure.GPIO_Speed=GPIO_Speed_50MHz;
 	GPIO_Init(GPIOA,&GPIO_InitStructure);
+	
 } 
 
 /**************************************************************************
@@ -23,16 +27,23 @@ void HDL_KEY_INIT(void)
 入口参数：无
 返回  值：按键状态 0：无动作 1：单击 
 **************************************************************************/
-u8 HDL_KEY_SCAN(void)
+
+
+u8 i=0;
+void HDL_KEY_SCAN(void)
 {
-	static u8 flag_key=1;//按键按松开标志
-	if(flag_key&&KEY==0)
+	static u8 key_up=1;//按键按松开标志	  
+	if(key_up==1&&KEY==0)
 	{
-		flag_key=0;
-		return 1;	// 按键按下
+		key_up=0;
+		if(KEY==0)
+			i++;
+	
+			event_establish(EVENT_KEY_PRESSED);
 	}
-	else if(1==KEY)			flag_key=1;
-	return 0;//无按键按下
+	else if(KEY==1)
+		key_up=1; 	    
+ 	
 }
 
 /**************************************************************************

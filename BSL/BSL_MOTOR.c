@@ -8,19 +8,14 @@
 入口参数：左轮PWM、右轮PWM
 返回  值：无
 **************************************************************************/
-void BSL_Set_Pwm(int motor_a,int motor_b,int servo)
+void BSL_Set_Pwm(int motor_a,int motor_b)
 {
-//	    if(Flag_Way>=2)//巡线模式下，只允许电机正转
-//			{
-//			  if(motor_a<0)motor_a=0;
-//				if(motor_b<0)motor_b=0;
-//			}
-//    	if(motor_a<0)			PWMA1=7200,PWMA2=7200+motor_a;
-//			else 	            PWMA2=7200,PWMA1=7200-motor_a;
-//		
-//		  if(motor_b<0)			PWMB1=7200,PWMB2=7200+motor_b;
-//			else 	            PWMB2=7200,PWMB1=7200-motor_b;
-//     SERVO=servo;	
+	    
+    	if(motor_a<0)			PWMA1=7200,PWMA2=7200+motor_a;
+			else 	            PWMA2=7200,PWMA1=7200-motor_a;
+		
+		  if(motor_b<0)			PWMB1=7200,PWMB2=7200+motor_b;
+			else 	            PWMB2=7200,PWMB1=7200-motor_b;
 }
 
 /**************************************************************************
