@@ -4,7 +4,7 @@
 typedef struct
 { 
 
-	uint32_t distance;
+	float distance;
 	uint8_t speed;
 	uint8_t quanshu;
 }ENCODER_NUM;
